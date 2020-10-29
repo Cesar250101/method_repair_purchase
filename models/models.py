@@ -17,7 +17,8 @@ class ReparacionCompras(models.Model):
         user = self.env['res.users'].browse(current_uid)
         for i in self.operations:
             if i.product_id.product_tmpl_id.seller_ids.name.id:
-                producto_proveedor = i.product_id.product_tmpl_id.seller_ids.name.id
+                for s in i.product_id.product_tmpl_id.seller_ids:
+                    producto_proveedor = s.name.id
         if producto_proveedor==False:
             raise UserError(u'No se ha establecido un proveedor en la ficha del producto')
         new_rec = self.env['purchase.order'].create({
