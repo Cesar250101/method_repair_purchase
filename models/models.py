@@ -1,4 +1,4 @@
-seller_ids# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
 from datetime import datetime
@@ -16,7 +16,7 @@ class ReparacionCompras(models.Model):
         current_uid = context.get('uid')
         user = self.env['res.users'].browse(current_uid)
         for i in self.operations:
-            if i.product_id.product_tmpl_id.seller_ids.name.id:
+            if i.product_id.product_tmpl_id.seller_ids:
                 for s in i.product_id.product_tmpl_id.seller_ids:
                     producto_proveedor = s.name.id
         if producto_proveedor==False:
