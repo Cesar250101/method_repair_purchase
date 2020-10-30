@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+seller_ids# -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
 from datetime import datetime
@@ -35,8 +35,10 @@ class ReparacionCompras(models.Model):
         order_id=self.env['purchase.order'].search([('origin','=',self.name)],limit=1).id
 
         for i in self.operations:
-            producto_proveedor = i.product_id.product_tmpl_id.seller_ids.name.id
-            precio_compra=i.product_id.product_tmpl_id.seller_ids.price
+            for r in i.product_id.product_tmpl_id.seller_ids:
+                producto_proveedor = r.name.id
+            for h in i.product_id.product_tmpl_id.seller_ids:
+                precio_compra=h.price
             new_rec_lineas=self.env['purchase.order.line'].create({
                     'product_id': i.product_id.id,  # many2one must be an integer value
                     'Description':i.name,
