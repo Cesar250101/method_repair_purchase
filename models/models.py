@@ -5,7 +5,7 @@ from datetime import datetime
 from odoo.exceptions import UserError
 
 class ReparacionCompras(models.Model):
-    _inherit = 'mrp.repair'
+    _inherit = 'repair.order'
 
     @api.multi
     def action_validate(self):
